@@ -1,0 +1,76 @@
+/*
+ *
+ *  DIO_int.h
+ *
+ *******Created on  : Mar 26, 2020
+ *******Author      : OMAR ELGANZORY
+ *******Description : DIO Interfacing 
+ *
+ */
+
+
+/*************************************************************
+***         Guard Of File Will Call One Time IN .c         ***
+**************************************************************/
+
+
+#ifndef MCAL_DIO_INT_H_
+#define MCAL_DIO_INT_H_
+
+
+typedef enum {
+
+	DIO_enugroupA =0,
+	DIO_enugroupB,
+	DIO_enugroupC,
+	DIO_enugroupD
+
+}DIO_enuGroub_T;
+
+
+typedef enum {
+
+	DIO_enuPin0 =0,
+	DIO_enuPin1,
+	DIO_enuPin2,
+	DIO_enuPin3,
+	DIO_enuPin4,
+	DIO_enuPin5,
+	DIO_enuPin6,
+	DIO_enuPin7
+
+}DIO_enuPinGroup_T;
+
+
+typedef enum {
+
+	DIO_enuPinIN=0,
+	DIO_enuPinOUT
+
+}DIO_enuPinDir_T;
+
+
+typedef enum {
+
+	DIO_enuPinLow=0,
+	DIO_enuPinHigh
+
+}DIO_enuPinLevel_T;
+
+
+
+
+
+
+ErrorStatus DIO_enuSetPinDir(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8Dir);
+
+ErrorStatus DIO_enuSetPinValue(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8Val);
+
+u8 DIO_enuGetPinValue(u8 Copy_u8PortId, u8 Copy_u8PinId);
+
+ErrorStatus DIO_enuSetPortDir(u8 Copy_u8PortId ,u8 Copy_u8Dir);
+
+ErrorStatus DIO_enuSetPortValue(u8 Copy_u8PortId ,u8 Copy_u8Val);
+
+
+#endif /* MCAL_DIO_INT_H_ */

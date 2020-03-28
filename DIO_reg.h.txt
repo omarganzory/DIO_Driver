@@ -1,0 +1,41 @@
+/*
+ *
+ *  ERROR.h
+ *
+ *******Created on  : Mar 26, 2020
+ *******Author      : OMAR ELGANZORY
+ *******Description : MC DIO Registers Addresses
+ *
+ */
+ 
+ 
+/*************************************************************
+***         Guard Of File Will Call One Time IN .c         ***
+**************************************************************/
+
+
+#ifndef MCAL_DIO_REG_H_
+#define MCAL_DIO_REG_H_
+
+ /* PORTA REGISTER ADDRESSES */
+#define   DIO_Pu8DDRA    *((volatile u8 *)0x3A)
+#define   DIO_Pu8PORTA   *((volatile u8 *)0x3B)
+#define   DIO_Pu8PINA    *((volatile u8 *)0x39)
+
+ /* PORTB REGISTER ADDRESSES */
+#define   DIO_Pu8DDRB    *((volatile u8 *)0x37)
+#define   DIO_Pu8PORTB   *((volatile u8 *)0x38)
+#define   DIO_Pu8PINB    *((volatile u8 *)0x36)
+
+ /* PORTC REGISTER ADDRESSES */
+#define   DIO_Pu8DDRC    *((volatile u8 *)0x34)
+#define   DIO_Pu8PORTC   *((volatile u8 *)0x35)
+#define   DIO_Pu8PINC    *((volatile u8 *)0x33)
+
+ /* PORTD REGISTER ADDRESSES */
+#define   DIO_Pu8DDRD    *((volatile u8 *)0x31)
+#define   DIO_Pu8PORTD  *((volatile u8 *)0x32)
+#define   DIO_Pu8PIND    *((volatile u8 *)0x30)
+
+
+#endif /* MCAL_DIO_REG_H_ */

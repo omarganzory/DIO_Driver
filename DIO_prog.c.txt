@@ -1,0 +1,192 @@
+/*
+ *
+ *  DIO_prog.c
+ *
+ *******Created on  : Mar 26, 2020
+ *******Author      : OMAR ELGANZORY
+ *******Description : DIO Interfacing 
+ *
+ */
+ 
+ /**  Including Related Libraries   **/
+
+#include "STD.h"
+#include "BIT_MATH.h"
+#include "ERROR.h"
+
+#include "DIO_int.h"
+#include "DIO_reg.h"
+
+
+ /**  Set Port Direction to IN/OUT **/
+  
+ErrorStatus DIO_enuSetPortDir(u8 Copy_u8PortId, u8 Copy_u8Dir) {
+
+	ErrorStatus Error = ES_NOK;
+
+	if (Copy_u8PortId < 4) {
+		switch (Copy_u8PortId) {
+		case DIO_enugroupA:
+			DIO_Pu8DDRA = Copy_u8Dir;
+			break;
+		case DIO_enugroupB:
+			DIO_Pu8DDRB = Copy_u8Dir;
+			break;
+		case DIO_enugroupC:
+			DIO_Pu8DDRC = Copy_u8Dir;
+			break;
+		case DIO_enugroupD:
+			DIO_Pu8DDRD = Copy_u8Dir;
+			break;
+		}
+		return Error = ES_OK;
+	} else {
+		return Error = ES_NOK;
+	}
+}
+
+ /**  Set PORT VALUE For OUTPUT Case
+  **     or To Activate Pull_Up     **/
+ErrorStatus DIO_enuSetPortValue(u8 Copy_u8PortId, u8 Copy_u8Val) {
+
+	ErrorStatus Error = ES_NOK;
+
+	if (Copy_u8PortId < 4) {
+		switch (Copy_u8PortId) {
+		case DIO_enugroupA:
+			DIO_Pu8PORTA = Copy_u8Val;
+			break;
+		case DIO_enugroupB:
+			DIO_Pu8PORTB = Copy_u8Val;
+			break;
+		case DIO_enugroupC:
+			DIO_Pu8PORTC = Copy_u8Val;
+			break;
+		case DIO_enugroupD:
+			DIO_Pu8PIND = Copy_u8Val;
+			break;
+		}
+		return Error = ES_OK;
+	} else {
+		return Error = ES_NOK;
+	}
+}
+
+ /**  Seting PIN Direction...Instead of The Whole Register  **/
+ 
+ErrorStatus DIO_enuSetPinDir(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8Dir) {
+
+	ErrorStatus Error = ES_NOK;
+
+	if ((Copy_u8PortId < 4) && (Copy_u8PinId < 8)) {
+		if (Copy_u8Dir == DIO_enuPinOUT) {
+			switch (Copy_u8PortId) {
+			case DIO_enugroupA:
+				SET_BIT(DIO_Pu8DDRA, Copy_u8PinId);
+				break;
+			case DIO_enugroupB:
+				SET_BIT(DIO_Pu8DDRB, Copy_u8PinId);
+				break;
+			case DIO_enugroupC:
+				SET_BIT(DIO_Pu8DDRC, Copy_u8PinId);
+				break;
+			case DIO_enugroupD:
+				SET_BIT(DIO_Pu8DDRD, Copy_u8PinId);
+				break;
+			}
+		} else if (Copy_u8Dir == DIO_enuPinIN) {
+			switch (Copy_u8PortId) {
+			case DIO_enugroupA:
+				CLEAR_BIT(DIO_Pu8DDRA, Copy_u8PinId);
+				break;
+			case DIO_enugroupB:
+				CLEAR_BIT(DIO_Pu8DDRB, Copy_u8PinId);
+				break;
+			case DIO_enugroupC:
+				CLEAR_BIT(DIO_Pu8DDRC, Copy_u8PinId);
+				break;
+			case DIO_enugroupD:
+				CLEAR_BIT(DIO_Pu8DDRD, Copy_u8PinId);
+				break;
+			}
+		}
+		return Error = ES_OK;
+	} else {
+		return Error = ES_NOK;
+	}
+}
+
+ /**  Seting PIN Value For High=1/Low=0  **/
+ 
+ErrorStatus DIO_enuSetPinValue(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8Val) {
+
+	ErrorStatus Error = ES_NOK;
+
+	if ((Copy_u8PortId < 4) && (Copy_u8PinId < 8)) {
+		if (Copy_u8Val == DIO_enuPinHigh) {
+			switch (Copy_u8PortId) {
+			case DIO_enugroupA:
+				SET_BIT(DIO_Pu8PORTA, Copy_u8PinId);
+				break;
+			case DIO_enugroupB:
+				SET_BIT(DIO_Pu8PORTB, Copy_u8PinId);
+				break;
+			case DIO_enugroupC:
+				SET_BIT(DIO_Pu8PORTC, Copy_u8PinId);
+				break;
+			case DIO_enugroupD:
+				SET_BIT(DIO_Pu8PORTD, Copy_u8PinId);
+				break;
+			}
+
+		} else if (Copy_u8Val == DIO_enuPinLow) {
+			switch (Copy_u8PortId) {
+			case DIO_enugroupA:
+				CLEAR_BIT(DIO_Pu8PORTA, Copy_u8PinId);
+				break;
+			case DIO_enugroupB:
+				CLEAR_BIT(DIO_Pu8PORTB, Copy_u8PinId);
+				break;
+			case DIO_enugroupC:
+				CLEAR_BIT(DIO_Pu8PORTC, Copy_u8PinId);
+				break;
+			case DIO_enugroupD:
+				CLEAR_BIT(DIO_Pu8PORTD, Copy_u8PinId);
+				break;
+			}
+		}
+		return Error = ES_OK;
+	} else {
+		return Error = ES_NOK;
+	}
+
+}
+
+  /**  Function to Read PIN Value And Return it  **/
+  
+u8 DIO_enuGetPinValue(u8 Copy_u8PortId, u8 Copy_u8PinId) {
+
+	DIO_enuPinLevel_T DIO_BitRetVal = 0;
+
+	if ((Copy_u8PortId < 4) && (Copy_u8PinId < 8)) {
+		switch (Copy_u8PortId) {
+		case DIO_enugroupA:
+			DIO_BitRetVal = GET_BIT(DIO_Pu8PORTA, Copy_u8PinId);
+			break;
+		case DIO_enugroupB:
+			DIO_BitRetVal = GET_BIT(DIO_Pu8PORTB, Copy_u8PinId);
+			break;
+		case DIO_enugroupC:
+			DIO_BitRetVal = GET_BIT(DIO_Pu8PORTC, Copy_u8PinId);
+			break;
+		case DIO_enugroupD:
+			DIO_BitRetVal = GET_BIT(DIO_Pu8PORTD, Copy_u8PinId);
+			break;
+		}
+	}
+	return DIO_BitRetVal;
+}
+
+ /*****************************************************************************
+ ****************************************************************************
+ **************************************************************************/
