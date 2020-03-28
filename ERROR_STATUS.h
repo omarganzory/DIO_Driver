@@ -1,6 +1,6 @@
 /*
  *
- *  ERROR.h
+ *  ERROR_STATUS.h
  *
  *******Created on  : Mar 26, 2020
  *******Author      : OMAR ELGANZORY
