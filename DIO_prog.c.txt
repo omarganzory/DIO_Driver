@@ -171,16 +171,16 @@ u8 DIO_enuGetPinValue(u8 Copy_u8PortId, u8 Copy_u8PinId) {
 	if ((Copy_u8PortId < 4) && (Copy_u8PinId < 8)) {
 		switch (Copy_u8PortId) {
 		case DIO_enugroupA:
-			DIO_BitRetVal = GET_BIT(DIO_Pu8PORTA, Copy_u8PinId);
+			DIO_BitRetVal = GET_BIT(DIO_Pu8PINA   , Copy_u8PinId);
 			break;
 		case DIO_enugroupB:
-			DIO_BitRetVal = GET_BIT(DIO_Pu8PORTB, Copy_u8PinId);
+			DIO_BitRetVal = GET_BIT(DIO_Pu8PINB    , Copy_u8PinId);
 			break;
 		case DIO_enugroupC:
-			DIO_BitRetVal = GET_BIT(DIO_Pu8PORTC, Copy_u8PinId);
+			DIO_BitRetVal = GET_BIT(DIO_Pu8PINC    , Copy_u8PinId);
 			break;
 		case DIO_enugroupD:
-			DIO_BitRetVal = GET_BIT(DIO_Pu8PORTD, Copy_u8PinId);
+			DIO_BitRetVal = GET_BIT(DIO_Pu8PIND    , Copy_u8PinId);
 			break;
 		}
 	}
